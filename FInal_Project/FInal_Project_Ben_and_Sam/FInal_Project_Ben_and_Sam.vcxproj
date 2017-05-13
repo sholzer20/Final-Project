@@ -148,6 +148,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Nurse.cpp" />
     <ClCompile Include="Person.cpp" />
+    <ClCompile Include="readint.cpp" />
     <ClCompile Include="Record.cpp" />
     <ClCompile Include="Simulator.cpp" />
   </ItemGroup>
@@ -157,6 +158,7 @@
     <ClInclude Include="HospitalStaff.h" />
     <ClInclude Include="Nurse.h" />
     <ClInclude Include="Person.h" />
+    <ClInclude Include="readint.h" />
     <ClInclude Include="Record.h" />
     <ClInclude Include="Simulator.h" />
   </ItemGroup>

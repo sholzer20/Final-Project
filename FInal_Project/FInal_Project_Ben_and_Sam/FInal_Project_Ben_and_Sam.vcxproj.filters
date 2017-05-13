@@ -39,6 +39,9 @@
     <ClCompile Include="Person.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="readint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Hospital.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Nurse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="readint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
