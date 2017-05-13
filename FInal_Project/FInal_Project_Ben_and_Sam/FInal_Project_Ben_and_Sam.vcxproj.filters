@@ -30,9 +30,6 @@
     <ClCompile Include="Hospital.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HospitalStaff.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Nurse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

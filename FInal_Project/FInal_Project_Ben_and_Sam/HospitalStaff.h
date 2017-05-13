@@ -22,8 +22,10 @@ public:
 	// Starting time will be passed to the staff member by hospital/simulator
 	void setStartingTime(int time) { startingTime = time; }
 
+	// Getters for private member variables
 	int getStartingTime() { return startingTime; }
 	Person* getPatient() { return patient; }
+	int getTreatmentTime() { return treatmentTime; }
 	
 };
 
