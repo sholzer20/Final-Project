@@ -144,6 +144,12 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Hospital.h" />
+    <ClInclude Include="Person.h" />
+    <ClInclude Include="Record.h" />
+    <ClInclude Include="Simulator.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
