@@ -4,5 +4,8 @@
 
 class Nurse : HospitalStaff {
 
+public:
+	virtual void setTreatmentTime();
+	virtual void newTreatment(Person* patient, int time);
 };
 #endif
