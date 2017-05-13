@@ -145,7 +145,10 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Doctor.h" />
     <ClInclude Include="Hospital.h" />
+    <ClInclude Include="HospitalStaff.h" />
+    <ClInclude Include="Nurse.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="Record.h" />
     <ClInclude Include="Simulator.h" />
