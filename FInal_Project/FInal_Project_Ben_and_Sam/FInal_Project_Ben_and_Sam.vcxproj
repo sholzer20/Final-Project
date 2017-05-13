@@ -142,7 +142,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Doctor.cpp" />
+    <ClCompile Include="Hospital.cpp" />
+    <ClCompile Include="HospitalStaff.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Nurse.cpp" />
+    <ClCompile Include="Person.cpp" />
+    <ClCompile Include="Record.cpp" />
+    <ClCompile Include="Simulator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Doctor.h" />
