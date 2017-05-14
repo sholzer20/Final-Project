@@ -144,7 +144,6 @@
   <ItemGroup>
     <ClCompile Include="Doctor.cpp" />
     <ClCompile Include="Hospital.cpp" />
-    <ClCompile Include="HospitalStaff.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Nurse.cpp" />
     <ClCompile Include="Person.cpp" />
