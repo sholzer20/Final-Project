@@ -1,9 +1,11 @@
 #include "Simulator.h"
 #include "readint.h"
 #include <iostream>
+#include <fstream>
 using std::cout;
 using std::cin;
 using std::endl;
+using std::ifstream;
 
 Simulator::Simulator(string fileName)
 {
@@ -26,7 +28,7 @@ void Simulator::runSimulator(int hours)
 	for (currentTime = 0; currentTime < hours * 60; currentTime++) {
 
 		// Check to see if a new illness has arisen, assuming there are any healthy people left.
-		if (rand() / RAND_MAX < illnessRate && hospital->numberOfPatients < town.size()) {
+		if (rand() / RAND_MAX < illnessRate && hospital->numberOfPatients() < town.size()) {
 
 			// Find a healthy person to make sick, and pass them to the hospital.
 			hospital->assignSeverity(newSick());
@@ -43,6 +45,37 @@ void Simulator::runSimulator(int hours)
 
 void Simulator::menu()
 {
+
+	// Display general results.
+	cout << "Simulation complete." << endl;
+	cout << "Total patient's treated: " << hospital->getTotalServed() << " patients." << endl;
+	cout << "Average visit time: " << hospital->getTotalTime() / hospital->getTotalServed() << " minutes." << endl << endl;
+
+	// Loop until the user chooses to end the program.
+	while (true) {
+
+		// Print out the menu.
+		
+		cout << "What would you like to view?" << endl << endl;
+		cout << "1. List all treated patients" << endl;
+		cout << "2. Look up patient records by name" << endl;
+		cout << "3. Exit the simulation " << endl;
+		int choice = read_int("", 1, 3);
+
+		// Act according to the user's choice.
+		if (choice == 1)
+			hospital->displayTreatedPatients();
+		else if (choice == 2) {
+			string name;
+			cout << "What patient would you like to look up records for?" << endl;
+			cin.ignore();
+			getline(cin, name);
+			hospital->displayPatientRecord(name);
+		}
+		else break;
+
+	}
+
 }
 
 Simulator::~Simulator()
@@ -57,6 +90,27 @@ Simulator::~Simulator()
 
 void Simulator::loadPeople(string fileName)
 {
+
+	// Create an input stream.
+	ifstream input;
+	input.open(fileName.c_str());
+
+	// Check to make sure everything is ok!
+	if (input.fail())
+		cout << "ERROR:  TEXT FILE NOT FOUND. :(" << endl;
+	else {
+
+		string name;
+		// Create people from the text file.
+		while (getline(input, name)) {
+			town.push_back(new Person(name));
+		}
+
+	}
+
+	// Close the input stream.
+	input.close();
+
 }
 
 void Simulator::init()
@@ -82,8 +136,8 @@ Person * Simulator::newSick()
 	while (true) {
 
 		int randomPerson = rand() % town.size();
-		if (!town[randomPerson]->isSick()) {
-			town[randomPerson]->makeSick();
+		if (!town[randomPerson]->getSickness()) {
+			town[randomPerson]->setSickness(true);
 			return town[randomPerson];
 			break;
 		}
