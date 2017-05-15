@@ -2,7 +2,8 @@
 
 void Nurse::setTreatmentTime()
 {
-	// TODO set a random time between 1-10
+	// Set a random treatment time from 1 to 10 minutes.
+	treatmentTime = (rand() % 10) + 1;
 }
 
 void Nurse::newTreatment(Person * patient, int time)
