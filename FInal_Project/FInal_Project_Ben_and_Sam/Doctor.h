@@ -3,7 +3,7 @@
 #include "HospitalStaff.h"
 #include "Person.h"
 
-class Doctor : HospitalStaff {
+class Doctor : public HospitalStaff {
 
 public:
 	virtual void setTreatmentTime();

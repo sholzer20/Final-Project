@@ -10,6 +10,7 @@ private:
 	int treatmentTime;
 	// The time they started treating the newest patient
 	int startingTime;
+
 public:
 
 	// Umbrella class to call the following three classes. Happens every time staff gets new patient
@@ -26,6 +27,7 @@ public:
 	int getStartingTime() { return startingTime; }
 	Person* getPatient() { return patient; }
 	int getTreatmentTime() { return treatmentTime; }
+
 	
 };
 

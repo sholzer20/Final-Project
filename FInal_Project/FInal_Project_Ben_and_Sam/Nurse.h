@@ -2,7 +2,7 @@
 #define NURSE_H_
 #include "HospitalStaff.h"
 
-class Nurse : HospitalStaff {
+class Nurse : public HospitalStaff {
 
 public:
 	virtual void setTreatmentTime();
