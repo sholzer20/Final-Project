@@ -3,7 +3,7 @@
 #include "Person.h"
 class HospitalStaff {
 
-private:
+protected:
 	// Will be null if they are available to treat a new Patient
 	Person* patient;
 	// How long they will take to treat the patient. Resets every time the staff gets a new patient
@@ -22,6 +22,8 @@ public:
 	virtual void setTreatmentTime() = 0;
 	// Starting time will be passed to the staff member by hospital/simulator
 	void setStartingTime(int time) { startingTime = time; }
+	// Concludes the treatment by setting the patient pointer to null.
+	void finishTreatment() { patient = NULL; }
 
 	// Getters for private member variables
 	int getStartingTime() { return startingTime; }

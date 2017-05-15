@@ -1,8 +1,11 @@
 #include "Doctor.h"
+#include <cstdlib>
+using std::rand;
 
 void Doctor::setTreatmentTime()
 {
-	// TODO set a new random time between 1-20
+	// Set a random treatment time from 1 to 20 minutes.
+	treatmentTime = (rand() % 20) + 1;
 }
 
 void Doctor::newTreatment(Person * patient, int time)
