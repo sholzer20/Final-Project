@@ -13,15 +13,37 @@ Hospital::Hospital(int doctors, int nurses)
 }
 
 /* Determines the range of the severity with one random value, then assigns a severity 
-	from that range to the patient object
+	from that range to the patient object. Adds the patient to the appropriate priority_queue
 	@param the patient pointer that has just gotten "sick 
 */
 void Hospital::assignSeverity(Person * patient)
 {
+	double random = ((double) rand() / RAND_MAX);
+	int severity;
+	// Severities between 1-10
+	if (random <= .7) {
+		severity = (rand() % 10) + 1;
+		lowPriority.push(patient);
+	}
+	// Severitites between 11-15
+	else if (random > .7 && random <= .9) {
+		severity = (rand() % 5) + 11;
+		highPriority.push(patient);
+	}
+	// Severities between 16-20
+	else if (random > .9) {
+		severity = (rand() % 5) + 16;
+		highPriority.push(patient);
+	}
+
+	patient->setSeverity(severity);
 }
 
+// This function is called once the Doctor or Nurse has completely treated a patient
+// Updates the patient's record to add a visit and their severity to the record
 void Hospital::updateRecord(Person * patient)
 {
+	patientRecords[patient->getName()]->updateFile(patient->getSeverity());
 }
 
 /*	A function to display the names of all the patients treated by the hospital. 
