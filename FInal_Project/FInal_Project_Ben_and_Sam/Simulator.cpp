@@ -16,6 +16,8 @@ Simulator::Simulator(string fileName)
 	// Load in people.
 	loadPeople(fileName);
 
+	cout << town.size();	
+
 	// Initialize RNG
 	srand((unsigned int)std::time(0));
 

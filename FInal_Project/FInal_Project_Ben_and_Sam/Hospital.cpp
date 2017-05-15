@@ -151,5 +151,11 @@ void Hospital::update(int currentTime)
 // @ return The combined size of both the priority queues
 int Hospital::numberOfPatients()
 {
-	return highPriority.size() + lowPriority.size();
+
+	// Keeps track of how many doctors and nurses are treating patients.
+	int treating = 0;
+	for (int i = 0; i < hospitalStaff.size(); i++)
+		if (hospitalStaff[i]->getPatient() != NULL) treating++;
+
+	return (highPriority.size() + lowPriority.size() + treating);
 }
