@@ -67,7 +67,9 @@ void Hospital::displayPatientRecord(string name)
 	if (patientRecords.count(name) > 0) 
 		patientRecords[name]->display();
 	else cout << "No patient found with name " << name << "." << std::endl;
+
 }
+
 
 // Checks to see if new patients can be accepted, or if patients being treated are ready to be discharged.
 void Hospital::update(int currentTime)
