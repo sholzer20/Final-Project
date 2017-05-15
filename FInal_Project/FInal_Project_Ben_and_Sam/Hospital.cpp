@@ -43,6 +43,13 @@ void Hospital::assignSeverity(Person * patient)
 // Updates the patient's record to add a visit and their severity to the record
 void Hospital::updateRecord(Person * patient)
 {
+
+	// Create the record if it does not exist already, and add the patient to the roster.
+	if (patientRecords.count(patient->getName()) == 0) {
+		patientRecords[patient->getName()] = new Record();
+		patientRoster.push_back(patient->getName());
+	}
+
 	patientRecords[patient->getName()]->updateFile(patient->getSeverity());
 }
 
@@ -90,6 +97,8 @@ void Hospital::update(int currentTime)
 			// Make the patient well.
 			hospitalStaff[i]->getPatient()->setSickness(false);
 
+			cout << hospitalStaff[i]->getPatient()->getName() << " has been treated." << std::endl;
+
 			// Release the patient from the doctor's care.
 			hospitalStaff[i]->finishTreatment();
 
@@ -101,7 +110,7 @@ void Hospital::update(int currentTime)
 	for (int i = 0; i < hospitalStaff.size(); i++) {
 		if (typeid(Doctor) == typeid(*(hospitalStaff[i]))
 			&& hospitalStaff[i]->getPatient() == NULL
-			&& highPriority.size > 0) {
+			&& highPriority.size() > 0) {
 
 			// If all the conditions passed, set the doctor up with the new patient.
 			hospitalStaff[i]->newTreatment(highPriority.top(), currentTime);
@@ -114,7 +123,7 @@ void Hospital::update(int currentTime)
 	for (int i = 0; i < hospitalStaff.size(); i++) {
 		if (typeid(Nurse) == typeid(*(hospitalStaff[i]))
 			&& hospitalStaff[i]->getPatient() == NULL
-			&& lowPriority.size > 0) {
+			&& lowPriority.size() > 0) {
 
 			// If all the conditions passed, set the nurse up with the new patient.
 			hospitalStaff[i]->newTreatment(lowPriority.top(), currentTime);
@@ -127,7 +136,7 @@ void Hospital::update(int currentTime)
 	for (int i = 0; i < hospitalStaff.size(); i++) {
 		if (typeid(Doctor) == typeid(*(hospitalStaff[i]))
 			&& hospitalStaff[i]->getPatient() == NULL
-			&& lowPriority.size > 0) {
+			&& lowPriority.size() > 0) {
 
 			// If all the conditions passed, set the doctor up with the new patient.
 			hospitalStaff[i]->newTreatment(lowPriority.top(), currentTime);

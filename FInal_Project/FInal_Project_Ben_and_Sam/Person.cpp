@@ -3,6 +3,7 @@
 Person::Person(std::string name)
 {
 	this->name = name;
+	isSick = false;
 }
 
 int Person::getSeverity()

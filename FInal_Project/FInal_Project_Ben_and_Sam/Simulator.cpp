@@ -27,8 +27,10 @@ void Simulator::runSimulator(int hours)
 	// Run the simulation for the pre-determined number of hours.
 	for (currentTime = 0; currentTime < hours * 60; currentTime++) {
 
+		cout << "Clock tick: " << currentTime << endl;
+
 		// Check to see if a new illness has arisen, assuming there are any healthy people left.
-		if (rand() / RAND_MAX < illnessRate && hospital->numberOfPatients() < town.size()) {
+		if ((double)rand() / (double)RAND_MAX < illnessRate && hospital->numberOfPatients() < town.size()) {
 
 			// Find a healthy person to make sick, and pass them to the hospital.
 			hospital->assignSeverity(newSick());
@@ -95,6 +97,10 @@ void Simulator::loadPeople(string fileName)
 	ifstream input;
 	input.open(fileName.c_str());
 
+	cout << "Loading people..." << endl << endl;
+
+	int numberOfPeople = 0;
+
 	// Check to make sure everything is ok!
 	if (input.fail())
 		cout << "ERROR:  TEXT FILE NOT FOUND. :(" << endl;
@@ -104,9 +110,13 @@ void Simulator::loadPeople(string fileName)
 		// Create people from the text file.
 		while (getline(input, name)) {
 			town.push_back(new Person(name));
+			numberOfPeople++;
 		}
 
 	}
+
+	cout << "Finished loading people." << endl;
+	cout << numberOfPeople << " people found." << endl;
 
 	// Close the input stream.
 	input.close();
@@ -118,11 +128,11 @@ void Simulator::init()
 
 	// Ask the user for information about the simulator.
 	cout << "What is the illness rate in people/hour? (Max 60)" << endl;
-	illnessRate = read_int("", 1, 60);
-	cout << "How many doctors are available to service patients?" << endl;
+	illnessRate = (double)read_int("", 1, 60) / 60.0;
+	cout << "How many doctors are available to service patients? (max 20)" << endl;
 	int doctors = read_int("", 1, 20);
-	cout << "How many nurses are available to service patients?" << endl;
-	int nurses = read_int("", 1, 20);
+	cout << "How many nurses are available to service patients? (max 10)" << endl;
+	int nurses = read_int("", 1, 10);
 
 	// Create the hospital with the given values.
 	hospital = new Hospital(doctors, nurses);
@@ -136,9 +146,10 @@ Person * Simulator::newSick()
 	while (true) {
 
 		int randomPerson = rand() % town.size();
-		if (!town[randomPerson]->getSickness()) {
+		if (!(town[randomPerson]->getSickness())) {
 			town[randomPerson]->setSickness(true);
 			town[randomPerson]->setAdmitTime(currentTime);
+			cout << town[randomPerson]->getName() << " has become ill..." << endl;
 			return town[randomPerson];
 			break;
 		}
