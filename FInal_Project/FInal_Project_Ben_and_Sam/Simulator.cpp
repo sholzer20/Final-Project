@@ -36,7 +36,7 @@ void Simulator::runSimulator(int hours)
 		}
 
 		// Have the hospital update.
-		hospital->update();
+		hospital->update(currentTime);
 
 	}
 		
@@ -138,6 +138,7 @@ Person * Simulator::newSick()
 		int randomPerson = rand() % town.size();
 		if (!town[randomPerson]->getSickness()) {
 			town[randomPerson]->setSickness(true);
+			town[randomPerson]->setAdmitTime(currentTime);
 			return town[randomPerson];
 			break;
 		}

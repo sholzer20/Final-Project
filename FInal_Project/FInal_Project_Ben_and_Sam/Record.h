@@ -13,6 +13,7 @@ public:
 	Record();
 	void display();
 	void updateFile(int severity);
+	int getVisits();
 };
 
 

@@ -60,10 +60,80 @@ void Hospital::displayTreatedPatients()
 }
 
 // Will acccess the correct patient record from the map based on the name of the patient
+// If the patient has no records, the user is informed that no patient was found.
 // Calls the display function on the record object
 void Hospital::displayPatientRecord(string name)
 {
-	patientRecords[name]->display();
+	if (patientRecords.count(name) > 0) 
+		patientRecords[name]->display();
+	else cout << "No patient found with name " << name << "." << std::endl;
+}
+
+// Checks to see if new patients can be accepted, or if patients being treated are ready to be discharged.
+void Hospital::update(int currentTime)
+{
+
+	// Check for patients ready to be discharged.
+	for (int i = 0; i < hospitalStaff.size(); i++) {
+		if (hospitalStaff[i]->getPatient() != NULL &&
+			currentTime - hospitalStaff[i]->getStartingTime() == hospitalStaff[i]->getTreatmentTime()) {
+
+			
+
+			// Update hospital records.
+			totalServed++;
+			totalTime += currentTime - hospitalStaff[i]->getPatient()->getAdmitTime();
+			updateRecord(hospitalStaff[i]->getPatient());
+
+			// Make the patient well.
+			hospitalStaff[i]->getPatient()->setSickness(false);
+
+			// Release the patient from the doctor's care.
+			hospitalStaff[i]->finishTreatment();
+
+		}
+
+	}
+
+	// Check to see if doctor's are available to treat the severe priority queue
+	for (int i = 0; i < hospitalStaff.size(); i++) {
+		if (typeid(Doctor) == typeid(*(hospitalStaff[i]))
+			&& hospitalStaff[i]->getPatient() == NULL
+			&& highPriority.size > 0) {
+
+			// If all the conditions passed, set the doctor up with the new patient.
+			hospitalStaff[i]->newTreatment(highPriority.top(), currentTime);
+			highPriority.pop();
+
+		}
+	}
+
+	// First, check nurses for treating the low priority queue since they are faster.
+	for (int i = 0; i < hospitalStaff.size(); i++) {
+		if (typeid(Nurse) == typeid(*(hospitalStaff[i]))
+			&& hospitalStaff[i]->getPatient() == NULL
+			&& lowPriority.size > 0) {
+
+			// If all the conditions passed, set the nurse up with the new patient.
+			hospitalStaff[i]->newTreatment(lowPriority.top(), currentTime);
+			lowPriority.pop();
+
+		}
+	}
+
+	// If no nurses are available to treat remaining low priority patients, check for doctors.
+	for (int i = 0; i < hospitalStaff.size(); i++) {
+		if (typeid(Doctor) == typeid(*(hospitalStaff[i]))
+			&& hospitalStaff[i]->getPatient() == NULL
+			&& lowPriority.size > 0) {
+
+			// If all the conditions passed, set the doctor up with the new patient.
+			hospitalStaff[i]->newTreatment(lowPriority.top(), currentTime);
+			lowPriority.pop();
+
+		}
+	}
+
 }
 
 // Accessor for the number of Person objects held in the Hospital
