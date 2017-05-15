@@ -43,6 +43,7 @@ public:
 	void updateRecord(Person* patient);
 	void displayTreatedPatients();
 	void displayPatientRecord(string name);
+	void update(int currentTime);
 
 	int getTotalTime() { return totalTime; }
 	int getTotalServed() { return totalServed; }

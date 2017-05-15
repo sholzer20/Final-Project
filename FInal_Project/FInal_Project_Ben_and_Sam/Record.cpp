@@ -31,3 +31,8 @@ void Record::updateFile(int severity)
 	visits++;
 	severities.push_back(severity);
 }
+
+int Record::getVisits()
+{
+	return visits;
+}
