@@ -49,7 +49,8 @@ void Simulator::menu()
 	// Display general results.
 	cout << "Simulation complete." << endl;
 	cout << "Total patient's treated: " << hospital->getTotalServed() << " patients." << endl;
-	cout << "Average visit time: " << hospital->getTotalTime() / hospital->getTotalServed() << " minutes." << endl << endl;
+	cout << "Average visit time: " << hospital->getTotalTime() / hospital->getTotalServed() << " minutes." << endl;
+	cout << "Untreated patients at end of simulation: " << hospital->numberOfPatients() << " patients." << endl << endl;
 
 	// Loop until the user chooses to end the program.
 	while (true) {
