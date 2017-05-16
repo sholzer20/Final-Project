@@ -2,6 +2,7 @@
 #include "readint.h"
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 using std::cout;
 using std::cin;
 using std::endl;
@@ -53,7 +54,7 @@ void Simulator::menu()
 	// Display general results.
 	cout << "Simulation complete." << endl;
 	cout << "Total patient's treated: " << hospital->getTotalServed() << " patients." << endl;
-	cout << "Average visit time: " << hospital->getTotalTime() / hospital->getTotalServed() << " minutes." << endl;
+	cout << "Average visit time: " << std::fixed << std::setprecision(2) << (double)hospital->getTotalTime() / (double)hospital->getTotalServed() << " minutes." << endl;
 	cout << "Untreated patients at end of simulation: " << hospital->numberOfPatients() << " patients." << endl << endl;
 
 	// Loop until the user chooses to end the program.
