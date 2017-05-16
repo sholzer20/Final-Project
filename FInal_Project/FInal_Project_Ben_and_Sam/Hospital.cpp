@@ -63,6 +63,8 @@ void Hospital::displayTreatedPatients()
 			cout << patientRoster[i] << ", ";
 		else
 			cout << patientRoster[i] << std::endl;
+		if (i % 10 == 9)
+			cout << std::endl;
 	}
 }
 
@@ -96,8 +98,6 @@ void Hospital::update(int currentTime)
 
 			// Make the patient well.
 			hospitalStaff[i]->getPatient()->setSickness(false);
-
-			cout << hospitalStaff[i]->getPatient()->getName() << " has been treated." << std::endl;
 
 			// Release the patient from the doctor's care.
 			hospitalStaff[i]->finishTreatment();

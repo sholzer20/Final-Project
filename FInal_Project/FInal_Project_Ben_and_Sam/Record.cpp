@@ -23,7 +23,7 @@ void Record::display()
 			cout << severities[i] << endl;
 	}
 
-	cout << "----------------------------------------------------------" << endl;
+	cout << "----------------------------------------------------------" << endl << endl;
 }
 
 void Record::updateFile(int severity)
