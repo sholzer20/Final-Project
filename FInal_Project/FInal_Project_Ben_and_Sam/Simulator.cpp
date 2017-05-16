@@ -14,9 +14,7 @@ Simulator::Simulator(string fileName)
 	init();
 
 	// Load in people.
-	loadPeople(fileName);
-
-	cout << town.size();	
+	loadPeople(fileName);	
 
 	// Initialize RNG
 	srand((unsigned int)std::time(0));
@@ -28,8 +26,6 @@ void Simulator::runSimulator(int hours)
 	
 	// Run the simulation for the pre-determined number of hours.
 	for (currentTime = 0; currentTime < hours * 60; currentTime++) {
-
-		cout << "Clock tick: " << currentTime << endl;
 
 		// Check to see if a new illness has arisen, assuming there are any healthy people left.
 		if ((double)rand() / (double)RAND_MAX < illnessRate && hospital->numberOfPatients() < town.size()) {
@@ -99,7 +95,7 @@ void Simulator::loadPeople(string fileName)
 	ifstream input;
 	input.open(fileName.c_str());
 
-	cout << "Loading people..." << endl << endl;
+	cout << "Loading people..." << endl;
 
 	int numberOfPeople = 0;
 
@@ -118,8 +114,8 @@ void Simulator::loadPeople(string fileName)
 	}
 
 	cout << "Finished loading people." << endl;
-	cout << numberOfPeople << " people found." << endl;
-
+	cout << numberOfPeople << " people found." << endl << endl;
+	
 	// Close the input stream.
 	input.close();
 
@@ -151,7 +147,6 @@ Person * Simulator::newSick()
 		if (!(town[randomPerson]->getSickness())) {
 			town[randomPerson]->setSickness(true);
 			town[randomPerson]->setAdmitTime(currentTime);
-			cout << town[randomPerson]->getName() << " has become ill..." << endl;
 			return town[randomPerson];
 			break;
 		}
